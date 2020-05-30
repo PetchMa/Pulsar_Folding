@@ -7,6 +7,16 @@ Check out the [Notebook Tutorial](https://github.com/PetchMa/Pulsar_Folding/blob
     <img src="https://github.com/PetchMa/pulsar_notebooks/blob/master/assets/FAST_folding.gif?raw=true">
 </p>
 
+# Brute Force Dedispersion Techniques 
+When pulsar pulses reach Earth they actually reach the observer at different times because the radiation travels through an interstellar medium causing dispersion of the pulses. These appear as a swooping curve instead of straight horizontal lines [plane waves]. If we are going to fold the pulses to increase SNR then we're making the assumption that the pulses arrive at the same time. Thus we need to correct the dispersion by shifting each channel down a certain time delay relative to its frequency channel. Computationally we index a column of the spectrogram in frequency and split it between a time delay and original data and swap the positions.
+
+However, the problem is, we don't know the dispersion measure `DM` of the signal. The `DM` is the path integral of the signal through the interstellar medium. What we do is we brute force the `DM` by executing multiple trials `DM`s and we take the highest SNR created by the dedispersion with the given trial `DM`.
+
+<p align="center"> 
+    <img src="https://astronomy.swin.edu.au/cms/cpg15x/albums/scaled_cache/wonderpulse-400x309.jpg">
+</p>
+
+
 # Fast Fourier and Fast Folding
 
 We first apply the discrete Fourier transform onto the data and look for the largest magnitude of the Fourier transform. This indicates potential periods within the data. Then we need to check for its consistency and we do so by folding the data by the period the Fourier transform indicates.
